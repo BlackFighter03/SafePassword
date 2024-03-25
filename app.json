@@ -4,27 +4,40 @@
     "slug": "PasswordSafe",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/Logo.png",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#202134",
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./assets/Logo.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#202134"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/Logo.png",
+        "backgroundColor": "#202134"
+      },
+      "splash": {
+        "image": "./assets/Logo.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#202134"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/Logo.png"
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
