@@ -3,7 +3,9 @@ import { View, Text } from 'react-native';
 export default Nl = () => {
   return (
     <View>
-    <Text></Text>
+      <Text></Text>
     </View>
-    );
+  );
 };
+
+

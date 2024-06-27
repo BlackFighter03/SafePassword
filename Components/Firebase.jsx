@@ -13,7 +13,5 @@ const firebaseConfig = {
 };
 
 const fb_app = initializeApp(firebaseConfig);
-const fb_auth = getAuth(fb_app);
-const fb_db = getFirestore(fb_auth);
 
-export { firebaseConfig, fb_app, fb_auth, fb_db };
+export { firebaseConfig, fb_app};

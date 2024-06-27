@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   textInputSetting: {
     fontSize: 17,
     padding: '1%',
+    marginTop: '5%',
     backgroundColor: '#ffff',
     marginLeft: '5%',
     marginRight: '5%',
@@ -58,7 +59,7 @@ const option=StyleSheet.create({
   },
 
   navigationHeader: {
-    title: 'Sign in',
+    title: 'Sign Up',
     headerStyle: {backgroundColor: '#00e480'},
     headerTintColor: '#ffff',
   },
