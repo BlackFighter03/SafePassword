@@ -1,3 +1,4 @@
+import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 40,
     color: '#ffff',
-    paddingTop: '35%',
+    paddingTop: '30%',
     fontWeight: 'bold',
   },
 
@@ -31,6 +32,25 @@ const styles = StyleSheet.create({
 
   },
 
+  pwdInputSetting: {
+    position: 'relative',
+    fontSize: 17,
+    padding: '1%',
+    marginTop: '5%',
+    backgroundColor: '#ffff',
+    marginLeft: '5%',
+    marginRight: '5%',
+  },
+
+  fontAwesomeEyeSetting: {
+    position: 'absolute',
+    fontSize: 27.5,
+    padding: '1%',
+    marginTop: '5%',
+    backgroundColor: '#ffff',
+    marginLeft: '85%',
+  },
+
   buttonSetting: {
     itemAlign: 'center',
     marginLeft: '25%',
@@ -49,6 +69,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#ffff',
     textDecorationLine: 'underline',
+  },
+
+  Icon: {
+    justifyContent: 'right',
+    alignItems: 'right',
   },
 
 });

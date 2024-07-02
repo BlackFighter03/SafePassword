@@ -1,13 +1,7 @@
-//Da usare per mostrare all'utente le password salvate
-//import { NavigationContainer } from '@react-navigation/native';
-//import { option} from './Components/Graphic features';
-//import Stack from './Components/Stack';
-//import Login from './Pages/Login page';
-
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import AuthenticationForm from './Components/Login settings/AuthenticationForm';
-import AuthenticatedScreen from './Components/Login settings/AuthenticatedScreen';
+import AuthenticationForm from './Pages/Login settings/AuthenticationForm';
+import AuthenticatedScreen from './Pages/Login settings/AuthenticatedScreen';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
 import { styles } from './Components/Graphic features';
 
@@ -45,12 +39,12 @@ const App = () => {
         }
       }
     } catch (error) {
-      console.error('Authentication error:', error.message);
+      alert("Email e/o password non sono corrette");
     }
   };
 
   return (
-    <View style={styles.container}>
+   <View style={styles.container}>
       {user? (
         <AuthenticatedScreen user={user} handleAuthentication={handleAuthentication} />
       ) : (
