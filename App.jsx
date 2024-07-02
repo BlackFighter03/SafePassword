@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import AuthenticationForm from './Pages/Login settings/AuthenticationForm';
-import AuthenticatedScreen from './Pages/Login settings/AuthenticatedScreen';
+import StartPage from './Pages/Start page';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
 import { styles } from './Components/Graphic features';
 
@@ -45,10 +44,8 @@ const App = () => {
 
   return (
    <View style={styles.container}>
-      {user? (
-        <AuthenticatedScreen user={user} handleAuthentication={handleAuthentication} />
-      ) : (
-        <AuthenticationForm
+        <StartPage
+          user={user}
           isLogin={isLogin}
           setIsLogin={setIsLogin}
           email={email}
@@ -59,7 +56,6 @@ const App = () => {
           setConfirmPassword={setConfirmPassword}
           handleAuthentication={handleAuthentication}
         />
-      )}
     </View>
   );
 };
