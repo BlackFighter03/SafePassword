@@ -1,8 +1,7 @@
+import { Alert } from 'react-native';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
 import StartPage from './Pages/Start page';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
-import { styles } from './Components/Graphic features';
 
 const App = () => {
   const [email, setEmail] = useState("");
@@ -32,18 +31,22 @@ const App = () => {
           if (password !== confirmPassword) {
             alert('Le password non sono uguali!');
             return;
+        } else {
+          try {
+            await createUser(auth, email, password);
+            console.log('User created successfully!');
+          } catch (error) {
+            Alert.alert("Avviso","L'account esiste già");
         }
-          await createUser(auth, email, password);
-          console.log('User created successfully!');
+      } 
         }
       }
     } catch (error) {
-      alert("Email e/o password non sono corrette");
+      Alert.alert("Email e/o password non sono corrette");
     }
   };
 
   return (
-   <View style={styles.container}>
         <StartPage
           user={user}
           isLogin={isLogin}
@@ -56,7 +59,6 @@ const App = () => {
           setConfirmPassword={setConfirmPassword}
           handleAuthentication={handleAuthentication}
         />
-    </View>
   );
 };
 

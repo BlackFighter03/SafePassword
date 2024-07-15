@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SafePasword",
-    "slug": "SafePasword",
+    "name": "SafePassword",
+    "slug": "SafePassword",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/Logo.png",

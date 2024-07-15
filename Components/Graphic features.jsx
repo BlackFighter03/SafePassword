@@ -1,4 +1,3 @@
-import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -7,12 +6,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#202134',
   },
 
+  
   titleSetting: {
     textAlign: 'center',
     fontSize: 40,
     color: '#ffff',
     paddingTop: '30%',
     fontWeight: 'bold',
+  },
+
+  headerContainer: {
+    marginTop: 'auto',
+    paddingTop: '3%',
+    backgroundColor: '#00e480',
+    headerTintColor: '#ffff',
+    paddingBottom: '3%',
+  },
+
+  textHeaderSetting: {
+    marginLeft: '5%',
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#ffff',
+    
   },
 
   textSetting: {
@@ -42,15 +58,6 @@ const styles = StyleSheet.create({
     marginRight: '5%',
   },
 
-  fontAwesomeEyeSetting: {
-    position: 'absolute',
-    fontSize: 27.5,
-    padding: '1%',
-    marginTop: '5%',
-    backgroundColor: '#ffff',
-    marginLeft: '85%',
-  },
-
   buttonSetting: {
     itemAlign: 'center',
     marginLeft: '25%',
@@ -71,9 +78,21 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 
-  Icon: {
-    justifyContent: 'right',
-    alignItems: 'right',
+  materialIconsAddStyle: {
+    padding: '0.85%',
+    position: 'absolute',
+    fontSize: 30,
+    marginLeft: '85%',
+  },
+
+  fontAwesomeEyeSettingStyle: {
+    position: 'absolute',
+    color: 'grey',
+    fontSize: 27.5,
+    padding: '1%',
+    marginTop: '5%',
+    backgroundColor: '#ffff',
+    marginLeft: '85%',
   },
 
 });
@@ -84,9 +103,12 @@ const option=StyleSheet.create({
   },
 
   navigationHeader: {
-    title: 'Sign Up',
     headerStyle: {backgroundColor: '#00e480'},
     headerTintColor: '#ffff',
+  },
+
+  buttonAdd: {
+    fontSize: 17,
   },
 
 });

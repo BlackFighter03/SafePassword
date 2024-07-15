@@ -18,7 +18,7 @@ const StartPage = ({
     return (
         <View style={styles.container}>
            {user? (
-             <AuthenticatedScreen user={user} handleAuthentication={handleAuthentication} />
+             <AuthenticatedScreen handleAuthentication={handleAuthentication} />
            ) : (
              <AuthenticationForm
                isLogin={isLogin}
