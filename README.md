@@ -1,13 +1,12 @@
 Installazione ambiente per la programmazione:
-1. Scaricare visual studio code
+
+1. Scaricare visual studio code, npm e node-js
 2. Scaricare da questo github il contenuto presente in main
 3. Inserire all'interno della cartella del codice il pacchetto presente nel link del cloud google allegato
-4. scaricare nel terminale expo con il comando "npm install expo"
+4. Scaricare nel terminale expo con il comando "npm install expo"
+5. Far partire la simulazione dell'app, trovandosi nella cartella in cui è presente tutto il progetto, scrivendo "npx expo start". Inizialmentete si potrebbero riscontrare degli errori che chiedono l'istallazione di altre librerie. Installare le librerie richieste dal terminale. 
 
-Inserimento del codice affinché l'app funzioni correttamente:
-
-https://drive.google.com/drive/folders/19Acn0u70DXPUR-lQctgFyLnD75XL2jtE?usp=sharing
-
+****************************************************************************************************************************************************************************************************************
 
 Attività da completare nell'app:
 
