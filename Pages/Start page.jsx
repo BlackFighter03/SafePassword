@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import { styles } from '../Components/Graphic features';
-import AuthenticationForm from './Login settings/AuthenticationForm';
+import AuthenticationForm from './Login page/AuthenticationForm';
 import AuthenticatedScreen from './AuthenticatedScreen';
 
 const StartPage = ({
