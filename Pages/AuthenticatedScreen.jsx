@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Button, Alert } from 'react-native';
-import { styles } from '../../Components/Graphic features';
+import { styles } from '../Components/Graphic features';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import * as FileSystem from 'expo-file-system';
 
