@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA4U_dccfM_KVnUBD-576JjDaX8G2hG-KI",
@@ -16,3 +17,4 @@ export const createUser = createUserWithEmailAndPassword;
 export const signInUser = signInWithEmailAndPassword;
 export const onAuthStateChange = onAuthStateChanged;
 export const signOutUser = signOut;
+export const storage = getStorage(fb_app);

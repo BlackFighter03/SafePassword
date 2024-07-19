@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Button, Alert } from 'react-native';
 import { styles } from '../Components/Graphic features';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import * as FileSystem from 'expo-file-system';
+import { storage, auth } from '../Components/Firebase';
+import { getStorage, ref, getDownloadURL, uploadString } from 'firebase/storage';
 
 const handleAddPassword = (setCreatePassword, state) => {
   Alert.alert('Aggiungi password', 'Funzionalità non ancora implementata.');
@@ -14,35 +15,49 @@ const AuthenticatedScreen = ({ handleAuthentication }) => {
   const fileName = 'passwords.json';
 
   useEffect(() => {
-    createFileIfNotExist();
-    loadPasswords();
+    loadPasswordsFromFirebase();
   }, []);
 
-  const createFileIfNotExist = async () => {
+  const loadPasswordsFromFirebase = async () => {
     try {
-      const fileExists = await FileSystem.getInfoAsync(FileSystem.documentDirectory + fileName);
-      if (!fileExists.exists) {
-        await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + fileName, '[]');
-      }
-    } catch (error) {
-      console.error('Errore durante la creazione del file:', error);
-    }
-  };
+      const userId = auth.currentUser.uid;
+      const filePath = `users/${userId}/passwords.json`;
+      const storageRef = ref(getStorage(), filePath); // Crea riferimento con getStorage()
 
-  const loadPasswords = async () => {
-    try {
-      const fileContent = await FileSystem.readAsStringAsync(FileSystem.documentDirectory + fileName);
-      setPasswords(JSON.parse(fileContent || '[]')); // Utilizza '[]' se il file è vuoto
+      // Prova a scaricare il file
+      try { 
+        const url = await getDownloadURL(storageRef);
+        const response = await fetch(url);
+        const fileContent = await response.text();
+        setPasswords(JSON.parse(fileContent));
+      } catch (downloadError) { 
+        // Gestisci l'errore di download, 
+        // probabilmente perché il file non esiste
+        if (downloadError.code === 'storage/object-not-found') {
+          // Crea un file vuoto se non esiste
+          await createEmptyFileOnFirebase(filePath);
+          setPasswords([]);
+        } else {
+          // Errore diverso da "file non trovato"
+          console.error('Errore nel download del file:', downloadError);
+          // Gestisci l'errore in modo appropriato, 
+          // ad esempio, mostrando un messaggio all'utente
+        }
+      }
+
     } catch (error) {
       console.error('Errore nel caricamento delle password:', error);
+      // Gestisci l'errore in modo appropriato
     }
   };
 
-  const savePasswords = async () => {
+  const createEmptyFileOnFirebase = async (filePath) => {
     try {
-      await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + fileName, JSON.stringify(passwords));
+      const storageRef = ref(getStorage(), filePath);
+      await uploadString(storageRef, '[]', 'raw'); // Carica una stringa vuota
     } catch (error) {
-      console.error('Errore nel salvataggio delle password:', error);
+      console.error('Errore nella creazione del file:', error);
+      // Gestisci l'errore in modo appropriato
     }
   };
 
