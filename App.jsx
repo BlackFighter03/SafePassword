@@ -3,13 +3,26 @@ import { useEffect, useState } from 'react';
 import StartPage from './Pages/Start page';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
 
+
+/**
+ * Struttura per l'inizializzazione dell'app
+ * (Da non modificare)
+ * @returns Inizio dell'intera app che ritorna la pagina per il login
+ */
 const App = () => {
+  /**
+   * Costanti e funzioni per modificare i valori delle costanti
+   * (email, password, conferma password, utente, se ha effettuato il login)
+   */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [user, setUser] = useState(null);
   const [isLogin, setIsLogin] = useState(true);
 
+  /**
+   * Funzione che si occupa di effettuare il cambio automatico dell'autenticazione e dell'utente
+   */
   useEffect(() => {
     const unsubscribe = onAuthStateChange(auth, (user) => {
       setUser(user);
@@ -18,6 +31,11 @@ const App = () => {
     return () => unsubscribe();
   }, [auth]);
 
+  /**
+   * Funzione asincrona che è sempre attiva per capire se è stato effettuato un accesso, un'iscrizione o un'uscita da un account.
+   * Ciò è utile per l'app per stare nella schermata apposita
+   * @returns stato di autenticazione
+   */
   const handleAuthentication = async () => {
     try {
       if (user) {
@@ -31,14 +49,14 @@ const App = () => {
           if (password !== confirmPassword) {
             alert('Le password non sono uguali!');
             return;
-        } else {
-          try {
-            await createUser(auth, email, password);
-            console.log('User created successfully!');
-          } catch (error) {
-            Alert.alert("Avviso","L'account esiste già");
-        }
-      } 
+          } else {
+            try {
+              await createUser(auth, email, password);
+              console.log('User created successfully!');
+            } catch (error) {
+              Alert.alert("Avviso", "L'account esiste già");
+            }
+          }
         }
       }
     } catch (error) {
@@ -47,18 +65,18 @@ const App = () => {
   };
 
   return (
-        <StartPage
-          user={user}
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          confirmPassword={confirmPassword}
-          setConfirmPassword={setConfirmPassword}
-          handleAuthentication={handleAuthentication}
-        />
+    <StartPage
+      user={user}
+      isLogin={isLogin}
+      setIsLogin={setIsLogin}
+      email={email}
+      setEmail={setEmail}
+      password={password}
+      setPassword={setPassword}
+      confirmPassword={confirmPassword}
+      setConfirmPassword={setConfirmPassword}
+      handleAuthentication={handleAuthentication}
+    />
   );
 };
 

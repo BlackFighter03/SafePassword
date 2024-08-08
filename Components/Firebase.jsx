@@ -2,6 +2,9 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
 import { getStorage } from "firebase/storage";
 
+/**
+ * Configurazioni per firebase
+ * */
 const firebaseConfig = {
   apiKey: "AIzaSyA4U_dccfM_KVnUBD-576JjDaX8G2hG-KI",
   authDomain: "password-safe-66f8f.firebaseapp.com",
@@ -12,9 +15,9 @@ const firebaseConfig = {
 };
 
 export const fb_app = initializeApp(firebaseConfig);
-export const auth = getAuth(fb_app);
-export const createUser = createUserWithEmailAndPassword;
-export const signInUser = signInWithEmailAndPassword;
-export const onAuthStateChange = onAuthStateChanged;
-export const signOutUser = signOut;
+export const auth = getAuth(fb_app); //autenticazione
+export const createUser = createUserWithEmailAndPassword; //funzione per creare l'account
+export const signInUser = signInWithEmailAndPassword; //funzione per autenticare un utente
+export const onAuthStateChange = onAuthStateChanged; //funzione che si occupa del cambiamento sull'autenticazione
+export const signOutUser = signOut; //funzione per effettuare il logout da un acoount
 export const storage = getStorage(fb_app);
