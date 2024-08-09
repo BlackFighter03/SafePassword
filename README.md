@@ -54,3 +54,12 @@ Suggerimenti:
 Conclusione:
 
 Il progetto SafePassword è un buon punto di partenza per un gestore di password. Con alcune migliorie, potrebbe diventare un'applicazione robusta e affidabile.
+
+****************************************************************************************************************************************************************************************************************
+
+Comandi git da usare
+
+1. git pull "link"
+2. git add -A
+3. git commit ( -> i modifica effettuata -> schiacciare esc -> scrivere :x e premere invio)
+4. git push "link"
