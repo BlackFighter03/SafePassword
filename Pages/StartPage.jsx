@@ -22,6 +22,7 @@ const StartPage = ({
     <View style={styles.container}>
       {user ? (
         <AuthenticatedPage
+          user={user}
           email={email}
           handleAuthentication={handleAuthentication}
         />

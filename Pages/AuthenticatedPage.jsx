@@ -16,7 +16,7 @@ import sortedStrings from '../Components/PasswordSorting';
  * Gestisce la visualizzazione, l'aggiunta, la modifica e l'eliminazione delle password,
  * salvando i dati sia in Firebase Storage che nel file system del dispositivo.
  */
-const AuthenticatedPage = ({ email, handleAuthentication }) => {
+const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
   // --- Definizione delle costanti ---
 
   // Costanti per la gestione del file delle password
@@ -44,17 +44,17 @@ const AuthenticatedPage = ({ email, handleAuthentication }) => {
   const [usernameTemp, setUsernameTemp] = useState('');
   const [passwordTemp, setPasswordTemp] = useState('');
 
+  // Flag per indicare se è in corso il caricamento del file
+  const [isLoading, setIsLoading] = useState(true); // isLoading è ora gestito come stato
+
   // --- Effetto collaterale per il download iniziale delle password ---
 
   useEffect(() => {
     // Listener per lo stato di autenticazione di Firebase
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-     
-      if(email == null)
-        handleAuthentication;
-      else if (user) {
-         // Se l'utente è autenticato, scarica le password da Firebase
-        downloadFile();
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user && email) {
+        // Se l'utente è autenticato, scarica le password da Firebase
+        await downloadFile();
       }
     });
 
@@ -66,13 +66,14 @@ const AuthenticatedPage = ({ email, handleAuthentication }) => {
 
   useEffect(() => {
     const updateLocalFile = async () => {
+      if (isLoading) return; // Esci se il file è in caricamento
       try {
         const encryptedPasswords = decryptedPasswords.map((item) => ({
           website: criptaTesto(email, item.website),
           username: criptaTesto(email, item.username),
           password: criptaTesto(email, item.password),
         }));
-  
+
         await FileSystem.writeAsStringAsync(
           localFilePath,
           JSON.stringify(encryptedPasswords)
@@ -94,6 +95,7 @@ const AuthenticatedPage = ({ email, handleAuthentication }) => {
    * downloadFile: Scarica il file delle password da Firebase Storage.
    */
   const downloadFile = async () => {
+    setIsLoading(true); // Inizia il caricamento
     try {
       console.log('Provando a scaricare il file...');
       // Ottiene l'URL di download del file da Firebase Storage
@@ -121,19 +123,16 @@ const AuthenticatedPage = ({ email, handleAuthentication }) => {
         }));
         setDecryptedPasswords(decryptedData);
       } else {
-        setDecryptedPasswords([]); 
+        setDecryptedPasswords([]);
       }
+      setIsLoading(false); // Fine caricamento
     } catch (error) {
       // Gestione degli errori durante il download
       console.log(error);
-      // Se il file non esiste, crea un nuovo file vuoto
-      const fileExists = await FileSystem.getInfoAsync(localFilePath);
-      if (!fileExists) {
-        createEmptyFileOnDevice();
-      } else {
-        // Altrimenti, imposta 'passwords' come un array vuoto
-        setDecryptedPasswords([]);
-      }
+      createEmptyFileOnDevice();
+      // Imposta 'passwords' come un array vuoto
+      setDecryptedPasswords([]);
+      setIsLoading(false); // Fine caricamento
     }
   };
 
