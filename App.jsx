@@ -2,6 +2,7 @@ import { Alert } from 'react-native';
 import { useEffect, useState } from 'react';
 import StartPage from './Pages/StartPage';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
+import { removeFinalSpaces } from './Components/removeFinalSpaces';
 
 
 /**
@@ -43,9 +44,14 @@ const App = () => {
         console.log('User logged out successfully!');
       } else {
         if (!showSignUp) {
+          setEmail(removeFinalSpaces(email));
+          setPassword(removeFinalSpaces(password));
           await signInUser(auth, email, password);
           console.log('User signed in successfully!');
         } else {
+          setEmail(removeFinalSpaces(email));
+          setPassword(removeFinalSpaces(password));
+          setConfirmPassword(removeFinalSpaces(confirmPassword));
           if (password !== confirmPassword) {
             Alert.alert('Attenzione','Le password non sono uguali!');
             return;

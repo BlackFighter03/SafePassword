@@ -2,6 +2,7 @@ import { View, Modal, TextInput, Button, Text } from 'react-native';
 import { styles } from '../Components/Graphic features';
 import { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
+import { removeFinalSpaces } from '../Components/removeFinalSpaces';
 
 const AddPasswordModal = ({ websiteTemp, usernameTemp, passwordTemp, visible, onCancel, onSave, setWebsiteTemp, setUsernameTemp, setPasswordTemp }) => {
 
@@ -13,9 +14,9 @@ const AddPasswordModal = ({ websiteTemp, usernameTemp, passwordTemp, visible, on
   const [inputPercentualSetting, setInputPercentualSetting] = useState('50%');
 
   const handleSave = () => {
-    setWebsiteTemp(websiteTemp.trim());
-    setUsernameTemp(usernameTemp.trim());
-    setPasswordTemp(passwordTemp.trim());
+    setWebsiteTemp(removeFinalSpaces(websiteTemp));
+    setUsernameTemp(removeFinalSpaces(usernameTemp));
+    setPasswordTemp(removeFinalSpaces(passwordTemp));
 
     if (websiteTemp == "" || usernameTemp == "" || passwordTemp == ""){
       let count = 0;
