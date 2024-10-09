@@ -11,10 +11,10 @@ const Table = ({title, msg, visible, setVisible}) => {
         >
         <View style={styles.tableBackground}>
             <View style={styles.tableContent}>
-            <Text style={styles.textHeader}>{title}</Text>
-            <Text style={styles.text}>{msg}</Text>
-            <View marginTop='10%'>
-                <Pressable onPress={setVisible(false)}>
+            <Text style={styles.textHeaderTable}>{title}</Text>
+            <Text marginTop='2%' style={styles.textTable}>{msg}</Text>
+            <View marginTop='2%'>
+                <Pressable onPress={setVisible}>
                 <Text style={styles.textReturn}>OK</Text>
                 </Pressable>
             </View>
