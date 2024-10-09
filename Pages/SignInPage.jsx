@@ -4,7 +4,7 @@ import { styles } from '../Components/Graphic features';
 import { auth } from '../Components/Firebase';
 import { FontAwesome } from '@expo/vector-icons';
 import RecoveryPassword from './RecoveryPassword';
-import SingnUpPage from './SignUpPage';
+import SignUpPage from './SignUpPage';
 
 
 /**
@@ -96,7 +96,7 @@ const SignInPage = ({
         setForgotPasswordEmail={setForgotPasswordEmail}
         handleSignInPage={handleSignInPage}
       />
-      <SingnUpPage
+      <SignUpPage
         handleAuthentication={handleAuthentication}
         visible={showSignUp}
         setVisible={setShowSignUp}
