@@ -44,12 +44,11 @@ const App = () => {
         console.log('User logged out successfully!');
       } else {
         if (showSignUp) {
-          
           setEmail(removeFinalSpaces(email));
           setPassword(removeFinalSpaces(password));
           setConfirmPassword(removeFinalSpaces(confirmPassword));
           if (password !== confirmPassword) {
-            Alert.alert('Attenzione','Le password non sono uguali!');
+            Alert.alert('Attenzione', 'Le password non sono uguali!');
             return;
           } else {
             try {
