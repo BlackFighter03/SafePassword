@@ -7,7 +7,7 @@ import * as FileSystem from 'expo-file-system';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { Header as HeaderRNE, Icon } from '@rneui/themed';
 import { auth, storage } from '../Components/Firebase';
-import { setChiaveSegreta, criptaTesto, decriptaTesto } from '../Components/PersonalKey';
+import { criptaTesto, decriptaTesto } from '../Components/Criptography';
 import sortedStrings from '../Components/PasswordSorting';
 
 /**
@@ -69,9 +69,9 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
       if (isLoading) return; // Esci se il file è in caricamento
       try {
         const encryptedPasswords = decryptedPasswords.map((item) => ({
-          website: criptaTesto(email, item.website),
-          username: criptaTesto(email, item.username),
-          password: criptaTesto(email, item.password),
+          website: criptaTesto(user.uid, item.website),
+          username: criptaTesto(user.uid, item.username),
+          password: criptaTesto(user.uid, item.password),
         }));
 
         await FileSystem.writeAsStringAsync(
@@ -117,9 +117,9 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
       const passwordsData = JSON.parse(fileContent);
       if (passwordsData.length > 0) {
         const decryptedData = passwordsData.map((item) => ({
-          website: decriptaTesto(email, item.website),
-          username: decriptaTesto(email, item.username),
-          password: decriptaTesto(email, item.password),
+          website: decriptaTesto(user.uid, item.website),
+          username: decriptaTesto(user.uid, item.username),
+          password: decriptaTesto(user.uid, item.password),
         }));
         setDecryptedPasswords(decryptedData);
       } else {
