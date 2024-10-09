@@ -12,9 +12,7 @@ const ManageMenu = ({menuVisible, setMenuVisible, setTableVisible, setModalVisib
         <View style={styles.modalBackground}>
           <View style={styles.modalContent}>
             <Button title="Visualizza" onPress={() => {
-              console.log("Eccomi");
               setTableVisible(true);
-              {/*Alert.alert(item.website, `Nome utente: ${item.username}\nPassword: ${item.password}`); */}
               setMenuVisible(false); 
             }}  color="#00e480"/>
             <Button title="Modifica" onPress={() => {
