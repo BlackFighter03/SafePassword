@@ -43,12 +43,8 @@ const App = () => {
         await signOutUser(auth);
         console.log('User logged out successfully!');
       } else {
-        if (!showSignUp) {
-          setEmail(removeFinalSpaces(email));
-          setPassword(removeFinalSpaces(password));
-          await signInUser(auth, email, password);
-          console.log('User signed in successfully!');
-        } else {
+        if (showSignUp) {
+          
           setEmail(removeFinalSpaces(email));
           setPassword(removeFinalSpaces(password));
           setConfirmPassword(removeFinalSpaces(confirmPassword));
@@ -63,6 +59,11 @@ const App = () => {
               Alert.alert("Avviso", "L'account esiste già");
             }
           }
+        } else {
+          setEmail(removeFinalSpaces(email));
+          setPassword(removeFinalSpaces(password));
+          await signInUser(auth, email, password);
+          console.log('User signed in successfully!');
         }
       }
     } catch (error) {

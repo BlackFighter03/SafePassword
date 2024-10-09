@@ -7,8 +7,9 @@ import * as FileSystem from 'expo-file-system';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { Header as HeaderRNE, Icon } from '@rneui/themed';
 import { auth, storage } from '../Components/Firebase';
-import { setChiaveSegreta, criptaTesto, decriptaTesto } from '../Components/PersonalKey';
+import { criptaTesto, decriptaTesto } from '../Components/PersonalKey';
 import sortedStrings from '../Components/PasswordSorting';
+import SideMenu from '../Components/SideMenu';
 
 /**
  * Componente: AuthenticatedScreen
@@ -38,6 +39,9 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
 
   // Flag per gestire la visibilità del modale di modifica password
   const [modalVisibleForChange, setModalVisibleForChange] = useState(false);
+
+  // Booleana per apertura della tendina
+  const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
 
   // Variabili di stato per i campi di input del modale 
   const [websiteTemp, setWebsiteTemp] = useState('');
@@ -296,7 +300,8 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
         backgroundColor="#00e480"
         leftComponent={
           <View>
-            <TouchableOpacity onPress={handleAuthentication}>
+            <TouchableOpacity onPress={() => setIsOpenSideMenu(true)}>
+               {/**handleAuthentication usata per il logout*/}
               <Icon type="simplelineicons" name="logout" color="white" />
             </TouchableOpacity>
           </View>
@@ -346,6 +351,11 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
         setWebsiteTemp={setWebsiteTemp}
         setUsernameTemp={setUsernameTemp}
         setPasswordTemp={setPasswordTemp}
+      />
+
+      <SideMenu
+      isOpen={isOpenSideMenu}
+      onClose={() => setIsOpenSideMenu(false)}
       />
     </View>
   );
