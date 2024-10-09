@@ -7,7 +7,7 @@ import * as FileSystem from 'expo-file-system';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { Header as HeaderRNE, Icon } from '@rneui/themed';
 import { auth, storage } from '../Components/Firebase';
-import { setChiaveSegreta, criptaTesto, decriptaTesto } from '../Components/PersonalKey';
+import { criptaTesto, decriptaTesto } from '../Components/Criptography';
 import sortedStrings from '../Components/PasswordSorting';
 
 /**
