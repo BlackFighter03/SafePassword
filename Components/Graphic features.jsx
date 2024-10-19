@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import SideMenu from './SideMenu';
 
 const styles = StyleSheet.create({
   container: {
@@ -73,6 +74,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#ffff',
     
+  },
+
+  textSideMenu: {
+    textAlign: 'center',
+    fontSize: 13,
+    color: '#ffff',
+    flexWrap: 'nowrap',    
   },
 
   textTable: {
@@ -162,6 +170,26 @@ textFinishTable : {
     marginRight: '25%',
     fontSize: 17,
   },
+
+  buttonFirstSideMenu: {
+      paddingVertical:'1.1%',
+      paddingStart: '38.4%',
+      paddingEnd: '38.4%',
+      backgroundColor: '#01df81',
+      borderColor: "white",
+      borderWidth: 0.8
+  },
+
+  buttonSideMenu: {
+    paddingVertical:'1.1%',
+    paddingLeft:"40.5%",
+    paddingRight:"40.5%",
+    backgroundColor: '#01df81',
+    borderColor: "white",
+    borderLeftWidth: 0.8,
+    borderRightWidth:0.8,
+    borderBottomWidth:0.8
+},
 
   materialIconsAdd: {
     padding: '0.85%',
