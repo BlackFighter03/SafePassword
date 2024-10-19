@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Animated, Dimensions } from 'react-native';
 
-const SideMenu = ({ isOpen, onClose }) => {
+const SideMenu = ({ isOpen, onClose, onLogout }) => {
   const slideAnim = useRef(new Animated.Value(0)).current;
   const { width: screenWidth } = Dimensions.get('window');
-  const menuWidth = screenWidth * 0.7; // Aumentato la larghezza del menu al 70% dello schermo
+  const menuWidth = screenWidth * 0.7;
 
   useEffect(() => {
     Animated.timing(slideAnim, {
@@ -37,7 +37,6 @@ const SideMenu = ({ isOpen, onClose }) => {
       bottom: 0,
       zIndex: 1000,
     }}>
-      {/* Overlay scuro animato */}
       <Animated.View 
         style={{
           position: 'absolute',
@@ -58,7 +57,6 @@ const SideMenu = ({ isOpen, onClose }) => {
         />
       </Animated.View>
 
-      {/* Menu laterale */}
       <Animated.View 
         style={{
           position: 'absolute',
@@ -73,13 +71,23 @@ const SideMenu = ({ isOpen, onClose }) => {
           shadowOpacity: 0.25,
           shadowRadius: 3.84,
           elevation: 5,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        {/* Contenuto del menu */}
-        <TouchableOpacity onPress={onClose} style={{ padding: 20 }}>
-          <Text>Chiudi Menu</Text>
+        <TouchableOpacity 
+          onPress={() => {
+            onClose();
+            onLogout();
+          }} 
+          style={{ 
+            padding: 20,
+            backgroundColor: '#01df81',
+            borderRadius: 10,
+          }}
+        >
+          <Text style={{ color: 'white', fontWeight: 'bold' }}>Log Out</Text>
         </TouchableOpacity>
-        {/* Aggiungi qui le altre voci del tuo menu */}
       </Animated.View>
     </View>
   );

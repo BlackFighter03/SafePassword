@@ -11,6 +11,7 @@ import { criptaTesto, decriptaTesto } from '../Components/Criptography';
 import sortedStrings from '../Components/PasswordSorting';
 import SideMenu from '../Components/SideMenu';
 import { Text } from '@rneui/base';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 /**
  * Componente: AuthenticatedScreen
@@ -305,7 +306,7 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
           <View>
             <TouchableOpacity onPress={() => setIsOpenSideMenu(true)}>
                {/**handleAuthentication usata per il logout*/}
-              <Icon type="simplelineicons" name="logout" color="white" />
+               <MaterialCommunityIcons name="menu" size={24} color="White" />
             </TouchableOpacity>
           </View>
         }
