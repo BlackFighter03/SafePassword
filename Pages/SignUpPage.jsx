@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
 
 
-const SingnUpPage = ({ handleAuthentication, visible, setVisible, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword }) => {
+const SignUpPage = ({ handleAuthentication, visible, setVisible, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword }) => {
     const [showPassword, setShowPassword] = useState(true);
     const [showConfirmPassword, setShowConfirmPassword] = useState(true);
     const [error, setError] = useState(false);
@@ -85,4 +85,4 @@ const SingnUpPage = ({ handleAuthentication, visible, setVisible, email, setEmai
     );
 };
 
-export default SingnUpPage;
+export default SignUpPage;

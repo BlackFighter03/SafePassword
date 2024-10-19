@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Animated, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, Dimensions, Alert } from 'react-native';
+import { styles } from './Graphic features';
 
 const SideMenu = ({ isOpen, onClose, onLogout }) => {
   const slideAnim = useRef(new Animated.Value(0)).current;
@@ -60,9 +61,10 @@ const SideMenu = ({ isOpen, onClose, onLogout }) => {
       <Animated.View 
         style={{
           position: 'absolute',
-          top: 0,
+          top: '4.7%',
           bottom: 0,
           left: 0,
+          right: 0,
           width: menuWidth,
           backgroundColor: '#202134',
           transform: [{ translateX: menuTranslateX }],
@@ -71,22 +73,26 @@ const SideMenu = ({ isOpen, onClose, onLogout }) => {
           shadowOpacity: 0.25,
           shadowRadius: 3.84,
           elevation: 5,
-          justifyContent: 'center',
+          justifyContent: 'flex-star',
           alignItems: 'center',
         }}
       >
         <TouchableOpacity 
           onPress={() => {
             onClose();
+          }} 
+          style={styles.buttonFirstSideMenu}
+        >
+          <Text style={styles.textSideMenu}>Cambia password</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          onPress={() => {
+            onClose();
             onLogout();
           }} 
-          style={{ 
-            padding: 20,
-            backgroundColor: '#01df81',
-            borderRadius: 10,
-          }}
+          style={styles.buttonSideMenu}
         >
-          <Text style={{ color: 'white', fontWeight: 'bold' }}>Log Out</Text>
+          <Text style={styles.textSideMenu}>Log Out</Text>
         </TouchableOpacity>
       </Animated.View>
     </View>

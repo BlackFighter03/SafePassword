@@ -1,7 +1,7 @@
 import { View, Alert, Button, Modal } from 'react-native';
 import { styles } from './Graphic features';
 
-const ManageMenu = ({menuVisible, setMenuVisible, item, setModalVisible, removePassword }) => {
+const ManageMenu = ({menuVisible, setMenuVisible, setTableVisible, setModalVisible, removePassword }) => {
 
     return (
         <Modal
@@ -11,8 +11,8 @@ const ManageMenu = ({menuVisible, setMenuVisible, item, setModalVisible, removeP
       >
         <View style={styles.modalBackground}>
           <View style={styles.modalContent}>
-            <Button title="Visualizza" onPress={() => { 
-              Alert.alert(item.website, `Nome utente: ${item.username}\nPassword: ${item.password}`); 
+            <Button title="Visualizza" onPress={() => {
+              setTableVisible(true);
               setMenuVisible(false); 
             }}  color="#00e480"/>
             <Button title="Modifica" onPress={() => {

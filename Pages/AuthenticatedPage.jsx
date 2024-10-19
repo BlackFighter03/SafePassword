@@ -306,7 +306,7 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
           <View>
             <TouchableOpacity onPress={() => setIsOpenSideMenu(true)}>
                {/**handleAuthentication usata per il logout*/}
-               <MaterialCommunityIcons name="menu" size={24} color="White" />
+               <MaterialCommunityIcons name="menu" size={24} color="white" />
             </TouchableOpacity>
           </View>
         }
@@ -322,6 +322,7 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
       <SideMenu
         isOpen={isOpenSideMenu}
         onClose={() => setIsOpenSideMenu(false)}
+        onLogout={handleAuthentication}
       />
       <FlatList
         data={decryptedPasswords}

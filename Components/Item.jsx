@@ -4,11 +4,13 @@ import Entypo from '@expo/vector-icons/Entypo'
 import { useState } from 'react';
 import { styles } from './Graphic features';
 import { FontAwesome } from '@expo/vector-icons';
+import Table from './Table';
 
 
 const Item = ({ item, configureOpenMenu, setModalVisible, removePassword }) => {
     const [menuVisible, setMenuVisible] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [showInfo, setShowInfo] = useState(false);
     const [pwd, setPwd] = useState('*******');
 
     const handleOpenMenu = () => {
@@ -44,8 +46,14 @@ const Item = ({ item, configureOpenMenu, setModalVisible, removePassword }) => {
                 menuVisible={menuVisible}
                 setMenuVisible={setMenuVisible}
                 setModalVisible={setModalVisible}
-                item={item}
+                setTableVisible={setShowInfo}
                 removePassword={removePassword}
+            />
+            <Table
+            visible={showInfo}
+            setVisible={() => setShowInfo(false)}
+            title={"Sito web: "+item.website}
+            msg={"Nome utente: "+item.username+"\n"+"Password: "+item.password}
             />
         </View>
     );
