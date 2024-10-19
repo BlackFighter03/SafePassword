@@ -1,51 +1,93 @@
-import React, { useRef } from 'react';
-import { View, Text, TouchableOpacity, Animated } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Animated, Dimensions } from 'react-native';
 
-const SideMenu = ({ isOpen, onClose, children }) => {
+const SideMenu = ({ isOpen, onClose, onLogout }) => {
   const slideAnim = useRef(new Animated.Value(0)).current;
+  const { width: screenWidth } = Dimensions.get('window');
+  const menuWidth = screenWidth * 0.7;
 
   useEffect(() => {
     Animated.timing(slideAnim, {
       toValue: isOpen ? 1 : 0,
       duration: 300,
-      useNativeDriver: true, 
+      useNativeDriver: true,
     }).start();
   }, [isOpen]);
 
   const menuTranslateX = slideAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: [-250, 0], // Regola la larghezza del menu
+    outputRange: [-menuWidth, 0],
   });
 
-  return (
-    <View style={{ flex: 1 }}>
-      {/* Contenuto principale */}
-      <View style={{ flex: 1 }}>
-        {children}
-      </View>
+  const overlayOpacity = slideAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 0.5],
+  });
 
-      {/* Menu laterale */}
+  if (!isOpen) {
+    return null;
+  }
+
+  return (
+    <View style={{ 
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 1000,
+    }}>
+      <Animated.View 
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'black',
+          opacity: overlayOpacity,
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+          onPress={onClose}
+        />
+      </Animated.View>
+
       <Animated.View 
         style={{
           position: 'absolute',
           top: 0,
           bottom: 0,
           left: 0,
-          width: 250,
-          backgroundColor: 'white',
+          width: menuWidth,
+          backgroundColor: '#202134',
           transform: [{ translateX: menuTranslateX }],
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.5,
+          shadowOpacity: 0.25,
           shadowRadius: 3.84,
           elevation: 5,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        {/* Contenuto del menu */}
-        <TouchableOpacity onPress={onClose} style={{ padding: 20 }}>
-          <Text>Chiudi Menu</Text>
+        <TouchableOpacity 
+          onPress={() => {
+            onClose();
+            onLogout();
+          }} 
+          style={{ 
+            padding: 20,
+            backgroundColor: '#01df81',
+            borderRadius: 10,
+          }}
+        >
+          <Text style={{ color: 'white', fontWeight: 'bold' }}>Log Out</Text>
         </TouchableOpacity>
-        {/* Aggiungi qui le altre voci del tuo menu */}
       </Animated.View>
     </View>
   );

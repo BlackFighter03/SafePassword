@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Alert, FlatList } from 'react-native';
+import { View, TouchableOpacity, Alert, FlatList, Dimensions } from 'react-native';
 import AddPasswordModal from './AddPasswordModal';
 import Item from '../Components/Item';
 import { styles } from '../Components/Graphic features';
@@ -9,6 +9,9 @@ import { Header as HeaderRNE, Icon } from '@rneui/themed';
 import { auth, storage } from '../Components/Firebase';
 import { criptaTesto, decriptaTesto } from '../Components/Criptography';
 import sortedStrings from '../Components/PasswordSorting';
+import SideMenu from '../Components/SideMenu';
+import { Text } from '@rneui/base';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 /**
  * Componente: AuthenticatedScreen
@@ -38,6 +41,9 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
 
   // Flag per gestire la visibilità del modale di modifica password
   const [modalVisibleForChange, setModalVisibleForChange] = useState(false);
+
+  // Booleana per apertura della tendina
+  const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
 
   // Variabili di stato per i campi di input del modale 
   const [websiteTemp, setWebsiteTemp] = useState('');
@@ -289,15 +295,18 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
   };
 
   // --- Renderizzazione del componente ---
-
-  return (
+  
+ // Ottieni la larghezza dello schermo
+ const screenWidth = Dimensions.get('window').width;
+  return (  
     <View style={styles.container}>
       <HeaderRNE
         backgroundColor="#00e480"
         leftComponent={
           <View>
-            <TouchableOpacity onPress={handleAuthentication}>
-              <Icon type="simplelineicons" name="logout" color="white" />
+            <TouchableOpacity onPress={() => setIsOpenSideMenu(true)}>
+               {/**handleAuthentication usata per il logout*/}
+               <MaterialCommunityIcons name="menu" size={24} color="White" />
             </TouchableOpacity>
           </View>
         }
@@ -309,6 +318,10 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
             </TouchableOpacity>
           </View>
         }
+      />
+      <SideMenu
+        isOpen={isOpenSideMenu}
+        onClose={() => setIsOpenSideMenu(false)}
       />
       <FlatList
         data={decryptedPasswords}
