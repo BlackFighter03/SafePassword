@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Alert, FlatList } from 'react-native';
+import { View, TouchableOpacity, Alert, FlatList, Dimensions } from 'react-native';
 import AddPasswordModal from './AddPasswordModal';
 import Item from '../Components/Item';
 import { styles } from '../Components/Graphic features';
@@ -10,6 +10,7 @@ import { auth, storage } from '../Components/Firebase';
 import { criptaTesto, decriptaTesto } from '../Components/Criptography';
 import sortedStrings from '../Components/PasswordSorting';
 import SideMenu from '../Components/SideMenu';
+import { Text } from '@rneui/base';
 
 /**
  * Componente: AuthenticatedScreen
@@ -293,8 +294,10 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
   };
 
   // --- Renderizzazione del componente ---
-
-  return (
+  
+ // Ottieni la larghezza dello schermo
+ const screenWidth = Dimensions.get('window').width;
+  return (  
     <View style={styles.container}>
       <HeaderRNE
         backgroundColor="#00e480"
@@ -314,6 +317,10 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
             </TouchableOpacity>
           </View>
         }
+      />
+      <SideMenu
+        isOpen={isOpenSideMenu}
+        onClose={() => setIsOpenSideMenu(false)}
       />
       <FlatList
         data={decryptedPasswords}
@@ -351,11 +358,6 @@ const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
         setWebsiteTemp={setWebsiteTemp}
         setUsernameTemp={setUsernameTemp}
         setPasswordTemp={setPasswordTemp}
-      />
-
-      <SideMenu
-      isOpen={isOpenSideMenu}
-      onClose={() => setIsOpenSideMenu(false)}
       />
     </View>
   );
