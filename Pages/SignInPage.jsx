@@ -5,6 +5,7 @@ import { auth } from '../Components/Firebase';
 import { FontAwesome } from '@expo/vector-icons';
 import RecoveryPassword from './RecoveryPassword';
 import SignUpPage from './SignUpPage';
+import Table from '../Components/Table';
 
 
 /**
@@ -33,7 +34,7 @@ const SignInPage = ({
   setShowSignUp,
   warning,
   setWarning
-  }) => {
+}) => {
   const [showPassword, setShowPassword] = useState(true);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
   const [showForgotPasswordForm, setShowForgotPasswordForm] = useState(false);
@@ -112,6 +113,12 @@ const SignInPage = ({
         setShowSignUp={setShowSignUp}
         warning={warning}
         setWarning={setWarning}
+      />
+      <Table
+        visible={warning}
+        setVisible={() => setWarning(false)}
+        title={"Attenzione"}
+        msg={"Email e/o password non sono corrette"}
       />
     </View>
   );
