@@ -33,7 +33,9 @@ const SignInPage = ({
   showSignUp,
   setShowSignUp,
   warning,
-  setWarning
+  setWarning,
+  warningSignUp,
+  setWarningSignUp
 }) => {
   const [showPassword, setShowPassword] = useState(true);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
@@ -111,8 +113,8 @@ const SignInPage = ({
         setConfirmPassword={setConfirmPassword}
         showSignUp={showSignUp}
         setShowSignUp={setShowSignUp}
-        warning={warning}
-        setWarning={setWarning}
+        warningSignUp={warningSignUp}
+        setWarningSignUp={setWarningSignUp}
       />
       <Table
         visible={warning}
