@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, Pressable, TouchableOpacity } from 'reac
 import { styles } from '../Components/Graphic features';
 import { auth } from '../Components/Firebase';
 import { FontAwesome } from '@expo/vector-icons';
-import RecoveryPassword from './RecoveryPassword';
+import RecoveryPasswordPage from './RecoveryPasswordPage';
 import SignUpPage from './SignUpPage';
 import Table from '../Components/Table';
 
@@ -94,7 +94,7 @@ const SignInPage = ({
           </View>
         </View>
       </View>
-      <RecoveryPassword
+      <RecoveryPasswordPage
         auth={auth}
         visible={showForgotPasswordForm}
         forgotPasswordEmail={forgotPasswordEmail}
