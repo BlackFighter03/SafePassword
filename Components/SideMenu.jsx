@@ -1,19 +1,35 @@
-import React, { useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Animated, Dimensions, Alert } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Animated, Dimensions} from 'react-native';
 import { styles } from './Graphic features';
 
 const SideMenu = ({ isOpen, onClose, onLogout }) => {
   const slideAnim = useRef(new Animated.Value(0)).current;
+  const [isOnMenu, setIsOnMenu] = useState(false); 
   const { width: screenWidth } = Dimensions.get('window');
   const menuWidth = screenWidth * 0.7;
 
   useEffect(() => {
-    Animated.timing(slideAnim, {
-      toValue: isOpen ? 1 : 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  }, [isOpen]);
+    // Se isOpen è true, esegui l'animazione di apertura
+    if (isOpen) {
+     Animated.timing(slideAnim, {
+       toValue: 1,
+       duration: 300,
+       useNativeDriver: true,
+     }).start();
+     setIsOnMenu(true);
+   } 
+   // Altrimenti, esegui l'animazione di chiusura PRIMA di nascondere il menu
+   else{
+     Animated.timing(slideAnim, {
+       toValue: 0,
+       duration: 300,
+       useNativeDriver: true,
+     }).start(() => {
+       // Questa callback viene eseguita al termine dell'animazione.
+       setIsOnMenu(false);
+     });
+   }
+ }, [isOpen]);
 
   const menuTranslateX = slideAnim.interpolate({
     inputRange: [0, 1],
@@ -25,7 +41,7 @@ const SideMenu = ({ isOpen, onClose, onLogout }) => {
     outputRange: [0, 0.5],
   });
 
-  if (!isOpen) {
+  if(!isOnMenu){
     return null;
   }
 

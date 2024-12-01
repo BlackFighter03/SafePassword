@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
   textSideMenu: {
     textAlign: 'center',
-    fontSize: 13,
+    fontSize: 17,
     color: '#ffff',
     flexWrap: 'nowrap',    
   },
@@ -173,8 +173,8 @@ textFinishTable : {
 
   buttonFirstSideMenu: {
       paddingVertical:'1.1%',
-      paddingStart: '38.4%',
-      paddingEnd: '38.4%',
+      paddingStart: '35.05%',
+      paddingEnd: '35.05%',
       backgroundColor: '#01df81',
       borderColor: "white",
       borderWidth: 0.8
@@ -182,8 +182,8 @@ textFinishTable : {
 
   buttonSideMenu: {
     paddingVertical:'1.1%',
-    paddingLeft:"40.5%",
-    paddingRight:"40.5%",
+    paddingLeft:"37.9%",
+    paddingRight:"37.9%",
     backgroundColor: '#01df81',
     borderColor: "white",
     borderLeftWidth: 0.8,

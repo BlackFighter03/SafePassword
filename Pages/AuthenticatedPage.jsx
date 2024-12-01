@@ -10,16 +10,14 @@ import { auth, storage } from '../Components/Firebase';
 import { criptaTesto, decriptaTesto } from '../Components/Criptography';
 import sortedStrings from '../Components/PasswordSorting';
 import SideMenu from '../Components/SideMenu';
-import { Text } from '@rneui/base';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
 /**
  * Componente: AuthenticatedScreen
  * Descrizione: Questa schermata viene mostrata dopo l'accesso dell'utente.
  * Gestisce la visualizzazione, l'aggiunta, la modifica e l'eliminazione delle password,
  * salvando i dati sia in Firebase Storage che nel file system del dispositivo.
  */
-const AuthenticatedPage = ({ user, email, handleAuthentication }) => {
+const AuthenticatedPage = ({ user, email, password, handleAuthentication }) => {
   // --- Definizione delle costanti ---
 
   // Costanti per la gestione del file delle password

@@ -59,4 +59,4 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
   );
 };
 
-export default RecoveryPassword;
+export default RecoveryPasswordPage;
