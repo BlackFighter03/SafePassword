@@ -6,7 +6,11 @@ import { useState } from 'react';
 
 const changePassword = ({ auth, visible, }) => {
 
-  const msg = new Map();
+  
+  const [title, setTitle] = useState("");
+  const [msg, setMsg] = useState("");
+  const [oldPwd, setOldPwd] = useState("");
+  const [newPwd, setNewPwd] = useState("");
   const [info, setInfo] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
@@ -14,14 +18,14 @@ const changePassword = ({ auth, visible, }) => {
   const handleChangePassword = async () => {
     try {
       await sendPasswordResetEmail(auth, forgotPasswordEmail);
-      msg.set("title", "Avviso");
-      msg.set("info", "Nuova password impostata!");
+      setTitle("Avviso");
+      setMsg("Nuova password impostata!");
       setInfo(true);
       handleSignInPage();
     } catch (error) {
       console.error(error);
-      msg.set("title", "Attenzione");
-      msg.set("info", "Si è verificato un errore durante l'invio dell'email di recupero");
+      setTitle("Attenzione");
+      setMsg("Si è verificato un errore nell'impostazione della nuova password");
       setInfo(true);
     }
   };
@@ -41,25 +45,48 @@ const changePassword = ({ auth, visible, }) => {
           centerComponent={{ text: 'Cambia password', style: styles.textHeader, onPress: handleSignInPage }}
         />
         <View style={styles.container} marginTop='20%'>
-          <Text style={styles.text}>Inserisci la tua vecchia password:</Text>
-          <TextInput style={styles.textInput} autoCapitalize="none" onChangeText={setForgotPasswordEmail} value={forgotPasswordEmail} />
+          <View>
+            <Text style={styles.text}>Inserisci la tua vecchia password</Text>
+            <TextInput
+              style={styles.pwdInput}
+              secureTextEntry={showPassword}
+              placeholder='Vecchia Password'
+              onChangeText={setOldPwd}
+              value={oldPwd}
+            />
+            {showPassword ? (
+              <FontAwesome name="eye" style={styles.fontAwesomeEye} onPress={() => setShowPassword(!showPassword)} />
+            ) : (
+              <FontAwesome name="eye-slash" style={styles.fontAwesomeEye} onPress={() => setShowPassword(!showPassword)} />
+            )}
           </View>
-          <View style={styles.button} marginTop='15%'>
-          <Text style={styles.text}>Inserisci la tua nuova password:</Text>
-          <TextInput style={styles.textInput} autoCapitalize="none" onChangeText={setForgotPasswordEmail} value={forgotPasswordEmail} />
-          </View>
-          <View style={styles.button} marginTop='15%'>
-            <Button title="Richiedi password" onPress={handleChangePassword} color='#00e480' />
-          </View>
+        </View>
+        <Text style={styles.text} marginTop='5%'>Inserisci la tua password</Text>
+        <View>
+          <TextInput
+            style={styles.pwdInput}
+            secureTextEntry={showConfirmPassword}
+            placeholder='Nuova password'
+            onChangeText={setNewPwd}
+            value={newPwd}
+          />
+          {showConfirmPassword ? (
+            <FontAwesome name="eye" style={styles.fontAwesomeEye} onPress={() => setShowConfirmPassword(!showConfirmPassword)} />
+          ) : (
+            <FontAwesome name="eye-slash" style={styles.fontAwesomeEye} onPress={() => setShowConfirmPassword(!showConfirmPassword)} />
+          )}
+        </View>
+        <View style={styles.button} marginTop='15%'>
+          <Button title="Richiedi password" onPress={handleChangePassword} color='#00e480' />
         </View>
         <Table
           visible={info}
           setVisible={() => setInfo(false)}
-          title={msg.get("title")}
-          msg={msg.get("info")}
+          title={title}
+          msg={msg}
         />
       </View>
-    </Modal>
+    </Modal >
   );
 };
 
