@@ -202,10 +202,9 @@ textFinishTable : {
     position: 'absolute',
     color: 'grey',
     fontSize: 27.5,
-    padding: '1%',
     marginTop: '5%',
     backgroundColor: '#ffff',
-    marginLeft: '85%',
+    marginLeft: '87%',
   },
 
   fontAwesomeEyeItem: {
