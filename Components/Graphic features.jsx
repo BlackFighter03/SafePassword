@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
   tableContent: {
     backgroundColor: '#202134', 
     paddingTop: '2%',
-    paddingBottom: '2%',
+    paddingBottom: '3%',
+    paddingHorizontal: '0.75%',
     borderRadius: 5, 
     width: '75%', 
     elevation: 5, 
@@ -138,6 +139,7 @@ textFinishTable : {
   },
 
   textReturn: {
+    marginTop: '3%',
     marginLeft: '85%',
     marginRight: '2%',
     fontSize: 17,

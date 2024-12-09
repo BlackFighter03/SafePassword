@@ -1,4 +1,3 @@
-import { Alert } from 'react-native';
 import { useEffect, useState } from 'react';
 import StartPage from './Pages/StartPage';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
@@ -44,6 +43,7 @@ const App = () => {
       if (user) {
         await signOutUser(auth);
         console.log('User logged out successfully!');
+        setPassword('');
       } else {
         if (showSignUp) {
           setEmail(removeFinalSpaces(email));

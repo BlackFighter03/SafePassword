@@ -30,6 +30,7 @@ const StartPage = ({
           email={email}
           password={password}
           handleAuthentication={handleAuthentication}
+          setPassword={setPassword}
         />
       ) : (
         <SignInPage

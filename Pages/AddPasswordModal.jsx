@@ -1,4 +1,5 @@
 import { View, Modal, TextInput, Button, Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { styles } from '../Components/Graphic features';
 import { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
@@ -18,29 +19,29 @@ const AddPasswordModal = ({ websiteTemp, usernameTemp, passwordTemp, visible, on
     setUsernameTemp(removeFinalSpaces(usernameTemp));
     setPasswordTemp(removeFinalSpaces(passwordTemp));
 
-    if (websiteTemp == "" || usernameTemp == "" || passwordTemp == ""){
+    if (websiteTemp == "" || usernameTemp == "" || passwordTemp == "") {
       let count = 0;
-      if(websiteTemp == ""){
+      if (websiteTemp == "") {
         count++;
         setWebsiteVoid(true);
       }
       else
-       setWebsiteVoid(false);
+        setWebsiteVoid(false);
 
-      if(usernameTemp == ""){
+      if (usernameTemp == "") {
         setUsernameVoid(true);
         count++;
-      }else
+      } else
         setUsernameVoid(false);
-      if(passwordTemp == ""){
+      if (passwordTemp == "") {
         setPasswordVoid(true);
         count++;
-      }else
+      } else
         setPasswordVoid(false);
-        let percentualInput = 5 - count;
-        setInputPercentualSetting(percentualInput + "0%");
+      let percentualInput = 5 - count;
+      setInputPercentualSetting(percentualInput + "0%");
 
-    }else{
+    } else {
       setWebsiteVoid(false);
       setUsernameVoid(false);
       setPasswordVoid(false);
@@ -63,66 +64,72 @@ const AddPasswordModal = ({ websiteTemp, usernameTemp, passwordTemp, visible, on
 
   return (
     <Modal visible={visible} animationType="slide">
-      <View style={styles.container}>
-        <View marginTop={inputPercentualSetting}>
-          <Text style={styles.text} marginTop='5%'>Inserisci il nome del sito</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Sito Web"
-            onChangeText={setWebsiteTemp}
-            value={websiteTemp}
-          />
-          <Text style={styles.text} marginTop='5%'>Inserisci l'username (o email) </Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Nome Utente"
-            onChangeText={setUsernameTemp}
-            value={usernameTemp}
-          />
-          <Text style={styles.text} marginTop='5%'>Inserisci la password</Text>
-          <View>
-          <TextInput
-            style={styles.pwdInput}
-            placeholder="Password"
-            onChangeText={setPasswordTemp}
-            value={passwordTemp}
-            secureTextEntry={showPassword}
-          />
-          {showPassword ? (
-                  <FontAwesome name="eye" style={styles.fontAwesomeEye} onPress={() => setShowPassword(!showPassword)} />
-                ) : (
-                  <FontAwesome style={styles.fontAwesomeEye} name="eye-slash" onPress={() => setShowPassword(!showPassword)} />
-                )}
-          </View>
-          {websiteVoid ?
-            <View marginTop="10%">
-              <Text style={styles.textWarning}>Non hai inserito il sito</Text>
+      <KeyboardAwareScrollView
+        style={styles.container} // Imposta lo stile desiderato per la ScrollView. Assicurati che "flex: 1" sia presente.
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        scrollEnabled={true}
+      >
+        <View style={styles.container}>
+          <View marginTop={inputPercentualSetting}>
+            <Text style={styles.text} marginTop='5%'>Inserisci il nome del sito</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Sito Web"
+              onChangeText={setWebsiteTemp}
+              value={websiteTemp}
+            />
+            <Text style={styles.text} marginTop='5%'>Inserisci l'username (o email) </Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Nome Utente"
+              onChangeText={setUsernameTemp}
+              value={usernameTemp}
+            />
+            <Text style={styles.text} marginTop='5%'>Inserisci la password</Text>
+            <View>
+              <TextInput
+                style={styles.pwdInput}
+                placeholder="Password"
+                onChangeText={setPasswordTemp}
+                value={passwordTemp}
+                secureTextEntry={showPassword}
+              />
+              {showPassword ? (
+                <FontAwesome name="eye" style={styles.fontAwesomeEye} onPress={() => setShowPassword(!showPassword)} />
+              ) : (
+                <FontAwesome style={styles.fontAwesomeEye} name="eye-slash" onPress={() => setShowPassword(!showPassword)} />
+              )}
             </View>
-            :
-            null
-          }
+            {websiteVoid ?
+              <View marginTop="10%">
+                <Text style={styles.textWarning}>Non hai inserito il sito</Text>
+              </View>
+              :
+              null
+            }
 
-          {usernameVoid ?
-            <View marginTop="10%">
-              <Text style={styles.textWarning}>Non hai inserito l'username o l'email</Text>
-            </View>
-            :
-            null
-          }
+            {usernameVoid ?
+              <View marginTop="10%">
+                <Text style={styles.textWarning}>Non hai inserito l'username o l'email</Text>
+              </View>
+              :
+              null
+            }
 
-          {passwordVoid ?
-            <View marginTop="10%">
-              <Text style={styles.textWarning}>Non hai inserito la password</Text>
+            {passwordVoid ?
+              <View marginTop="10%">
+                <Text style={styles.textWarning}>Non hai inserito la password</Text>
+              </View>
+              :
+              null
+            }
+            <View style={styles.buttonContainer} marginTop={inputPercentualSetting}>
+              <Button title="Annulla" onPress={reset} color="red" />
+              <Button title="Salva" onPress={handleSave} color="#00e480" />
             </View>
-            :
-            null
-          }
-          <View style={styles.buttonContainer} marginTop={inputPercentualSetting}>
-            <Button title="Annulla" onPress={reset} color="red" />
-            <Button title="Salva" onPress={handleSave} color="#00e480" />
           </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     </Modal>
   );
 };

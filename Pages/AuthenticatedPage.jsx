@@ -11,13 +11,14 @@ import { criptaTesto, decriptaTesto } from '../Components/Criptography';
 import sortedStrings from '../Components/PasswordSorting';
 import SideMenu from '../Components/SideMenu';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import ChangePasswordPage from './ChangePasswordPage';
 /**
  * Componente: AuthenticatedScreen
  * Descrizione: Questa schermata viene mostrata dopo l'accesso dell'utente.
  * Gestisce la visualizzazione, l'aggiunta, la modifica e l'eliminazione delle password,
  * salvando i dati sia in Firebase Storage che nel file system del dispositivo.
  */
-const AuthenticatedPage = ({ user, email, password, handleAuthentication }) => {
+const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentication }) => {
   // --- Definizione delle costanti ---
 
   // Costanti per la gestione del file delle password
@@ -42,6 +43,9 @@ const AuthenticatedPage = ({ user, email, password, handleAuthentication }) => {
 
   // Booleana per apertura della tendina
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
+
+  // Booleana per apertura pagina cambio password
+  const [changePasswordVisible, setChangePasswordVisible] = useState(false);
 
   // Variabili di stato per i campi di input del modale 
   const [websiteTemp, setWebsiteTemp] = useState('');
@@ -295,7 +299,6 @@ const AuthenticatedPage = ({ user, email, password, handleAuthentication }) => {
   // --- Renderizzazione del componente ---
   
  // Ottieni la larghezza dello schermo
- const screenWidth = Dimensions.get('window').width;
   return (  
     <View style={styles.container}>
       <HeaderRNE
@@ -321,6 +324,7 @@ const AuthenticatedPage = ({ user, email, password, handleAuthentication }) => {
         isOpen={isOpenSideMenu}
         onClose={() => setIsOpenSideMenu(false)}
         onLogout={handleAuthentication}
+        setChangePwd={() => setChangePasswordVisible(true)}
       />
       <FlatList
         data={decryptedPasswords}
@@ -358,6 +362,14 @@ const AuthenticatedPage = ({ user, email, password, handleAuthentication }) => {
         setWebsiteTemp={setWebsiteTemp}
         setUsernameTemp={setUsernameTemp}
         setPasswordTemp={setPasswordTemp}
+      />
+      <ChangePasswordPage
+        auth={auth}
+        email={email}
+        password={password}
+        visible={changePasswordVisible}
+        onClose={() => setChangePasswordVisible(false)}
+        setPassword={setPassword}
       />
     </View>
   );

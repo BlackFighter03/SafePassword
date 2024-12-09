@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Animated, Dimensions} from 'react-native';
 import { styles } from './Graphic features';
 
-const SideMenu = ({ isOpen, onClose, onLogout }) => {
+const SideMenu = ({ isOpen, onClose, onLogout, setChangePwd }) => {
   const slideAnim = useRef(new Animated.Value(0)).current;
   const [isOnMenu, setIsOnMenu] = useState(false); 
   const { width: screenWidth } = Dimensions.get('window');
@@ -96,6 +96,7 @@ const SideMenu = ({ isOpen, onClose, onLogout }) => {
         <TouchableOpacity 
           onPress={() => {
             onClose();
+            setChangePwd(true);
           }} 
           style={styles.buttonFirstSideMenu}
         >

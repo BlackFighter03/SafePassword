@@ -1,56 +1,104 @@
 import { Header as HeaderRNE, Icon } from '@rneui/themed';
-import { View, Text, TextInput, Button, Modal, TouchableOpacity, Alert } from 'react-native';
-import { sendPasswordResetEmail } from '@firebase/auth';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { View, Text, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
+import { updatePassword, EmailAuthProvider, reauthenticateWithCredential } from '@firebase/auth';
 import { styles } from '../Components/Graphic features';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useState } from 'react';
+import Table from '../Components/Table';
 
-const changePassword = ({ auth, visible, }) => {
+const ChangePasswordPage = ({ auth, email, password, setPassword, visible, onClose }) => {
 
-  
-  const [title, setTitle] = useState("");
-  const [msg, setMsg] = useState("");
-  const [oldPwd, setOldPwd] = useState("");
-  const [newPwd, setNewPwd] = useState("");
-  const [info, setInfo] = useState(false);
+
+  const [oldPwd, setOldPwd] = useState('');
+  const [newPwd, setNewPwd] = useState('');
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+  const [info, setInfo] = useState(false);
+  const [title, setTitle] = useState('');
+  const [msg, setMsg] = useState('');
+  const user = auth.currentUser;
 
   const handleChangePassword = async () => {
-    try {
-      await sendPasswordResetEmail(auth, forgotPasswordEmail);
-      setTitle("Avviso");
-      setMsg("Nuova password impostata!");
-      setInfo(true);
-      handleSignInPage();
-    } catch (error) {
-      console.error(error);
+
+    if (newPwd.length < 6) {
       setTitle("Attenzione");
-      setMsg("Si è verificato un errore nell'impostazione della nuova password");
+      setMsg("La lunghezza della nuova password non è sufficiente. (Min 6 caratteri)");
       setInfo(true);
+    } else if (password != oldPwd) {
+      setTitle("Attenzione");
+      setMsg("La vecchia password non coincide con quella attuale");
+      setInfo(true);
+    } else if (password == newPwd) {
+      setTitle("Attenzione");
+      setMsg("La nuova password coincide con quella attuale");
+      setInfo(true);
+    } else {
+
+
+      try {
+
+        if (!user) {
+          // Gestisci il caso in cui l'utente non è loggato
+          setTitle("Errore");
+          setMsg("Utente non loggato");
+          setInfo(true);
+          onClose(); // Chiudi il modale 
+          return;
+        }
+        // Crea le credenziali con la vecchia password
+        const credential = EmailAuthProvider.credential(email, oldPwd);
+        // Riautentica l'utente
+        await reauthenticateWithCredential(user, credential);
+        // Aggiorna la password
+        await updatePassword(user, newPwd);
+        setPassword(newPwd);
+        setTitle("Avviso");
+        setMsg("Password aggiornata correttamente!");
+        setInfo(true);
+
+        setNewPwd('');
+        setOldPwd('');
+        // Chiudi il modale dopo il cambio password
+        onClose();
+      } catch (error) {
+        setTitle("Attenzione");
+        setMsg("Si è verificato un errore nell'impostazione della nuova password. Controlla di aver inserito i dati corretti");
+        setInfo(true);
+
+        console.error("Errore durante il cambio password:", error);
+
+      }
     }
   };
 
   return (
     <Modal visible={visible} animationType="slide">
+      <KeyboardAwareScrollView
+                style={styles.container} // Imposta lo stile desiderato per la ScrollView. Assicurati che "flex: 1" sia presente.
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                scrollEnabled={true}
+            >
       <View style={styles.container}>
         <HeaderRNE
           backgroundColor='#00e480'
           leftComponent={
             <View>
-              <TouchableOpacity onPress={handleSignInPage}>
+              <TouchableOpacity onPress={onClose}>
                 <Icon type="ionicon" name="return-up-back-outline" color="white" />
               </TouchableOpacity>
             </View>
           }
-          centerComponent={{ text: 'Cambia password', style: styles.textHeader, onPress: handleSignInPage }}
+          centerComponent={{ text: 'Cambia password', style: styles.textHeader, onPress: handleChangePassword }}
         />
         <View style={styles.container} marginTop='20%'>
+
+          <Text style={styles.text}>Inserisci la tua vecchia password</Text>
           <View>
-            <Text style={styles.text}>Inserisci la tua vecchia password</Text>
             <TextInput
               style={styles.pwdInput}
               secureTextEntry={showPassword}
-              placeholder='Vecchia Password'
+              placeholder='Vecchia password'
               onChangeText={setOldPwd}
               value={oldPwd}
             />
@@ -60,24 +108,24 @@ const changePassword = ({ auth, visible, }) => {
               <FontAwesome name="eye-slash" style={styles.fontAwesomeEye} onPress={() => setShowPassword(!showPassword)} />
             )}
           </View>
-        </View>
-        <Text style={styles.text} marginTop='5%'>Inserisci la tua password</Text>
-        <View>
-          <TextInput
-            style={styles.pwdInput}
-            secureTextEntry={showConfirmPassword}
-            placeholder='Nuova password'
-            onChangeText={setNewPwd}
-            value={newPwd}
-          />
-          {showConfirmPassword ? (
-            <FontAwesome name="eye" style={styles.fontAwesomeEye} onPress={() => setShowConfirmPassword(!showConfirmPassword)} />
-          ) : (
-            <FontAwesome name="eye-slash" style={styles.fontAwesomeEye} onPress={() => setShowConfirmPassword(!showConfirmPassword)} />
-          )}
-        </View>
-        <View style={styles.button} marginTop='15%'>
-          <Button title="Richiedi password" onPress={handleChangePassword} color='#00e480' />
+          <Text style={styles.text} marginTop='5%'>Inserisci la tua password</Text>
+          <View>
+            <TextInput
+              style={styles.pwdInput}
+              secureTextEntry={showConfirmPassword}
+              placeholder='Nuova password'
+              onChangeText={setNewPwd}
+              value={newPwd}
+            />
+            {showConfirmPassword ? (
+              <FontAwesome name="eye" style={styles.fontAwesomeEye} onPress={() => setShowConfirmPassword(!showConfirmPassword)} />
+            ) : (
+              <FontAwesome name="eye-slash" style={styles.fontAwesomeEye} onPress={() => setShowConfirmPassword(!showConfirmPassword)} />
+            )}
+          </View>
+          <View style={styles.button} marginTop='15%'>
+            <Button title="Richiedi password" onPress={handleChangePassword} color='#00e480' />
+          </View>
         </View>
         <Table
           visible={info}
@@ -86,8 +134,9 @@ const changePassword = ({ auth, visible, }) => {
           msg={msg}
         />
       </View>
+      </KeyboardAwareScrollView>
     </Modal >
   );
 };
 
-export default RecoveryPassword;
+export default ChangePasswordPage;
