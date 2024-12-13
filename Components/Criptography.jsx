@@ -1,5 +1,3 @@
-import 'react-native-get-random-values';
-
 const CryptoJS = require("crypto-js");
 
 export const criptaTesto = (email, str) => {
