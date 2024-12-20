@@ -296,9 +296,6 @@ const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentic
     setPasswordTemp('');
   };
 
-  // --- Renderizzazione del componente ---
-  
- // Ottieni la larghezza dello schermo
   return (  
     <View style={styles.container}>
       <HeaderRNE
