@@ -1,5 +1,5 @@
 import { Header as HeaderRNE, Icon } from '@rneui/themed';
-import { View, Text, TextInput, Button, Modal, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Modal, TouchableOpacity} from 'react-native';
 import { sendPasswordResetEmail } from '@firebase/auth';
 import { styles } from '../Components/Graphic features';
 import { useState } from 'react';
