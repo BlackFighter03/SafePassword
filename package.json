@@ -20,7 +20,7 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "@types/react": "^18.3.12",
     "crypto-js": "^4.2.0",
-    "expo": "^52.0.20",
+    "expo": "^52.0.17",
     "expo-font": "^13.0.1",
     "expo-status-bar": "^2.0.0",
     "firebase": "^10.14.1",

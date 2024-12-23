@@ -107,7 +107,7 @@ const SideMenu = ({ isOpen, onClose, onLogout, setChangePwd }) => {
             onClose();
             onLogout();
           }} 
-          style={styles.buttonLastSideMenu}
+          style={styles.buttonSideMenu}
         >
           <Text style={styles.textSideMenu}>Log Out</Text>
         </TouchableOpacity>
