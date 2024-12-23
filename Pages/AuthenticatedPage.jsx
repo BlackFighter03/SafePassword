@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Alert, FlatList, Platform } from 'react-native';
+import { View, TouchableOpacity, Alert, FlatList} from 'react-native';
 import AddPasswordModal from './AddPasswordModal';
 import Item from '../Components/Item';
 import { styles } from '../Components/Graphic features';
@@ -12,7 +12,6 @@ import sortedStrings from '../Components/PasswordSorting';
 import SideMenu from '../Components/SideMenu';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import ChangePasswordPage from './ChangePasswordPage';
-import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 /**
  * Componente: AuthenticatedScreen
@@ -58,37 +57,6 @@ const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentic
   const [isLoading, setIsLoading] = useState(true); // isLoading è ora gestito come stato
 
   // --- Effetto collaterale per il download iniziale delle password ---
-
-  async function requestStoragePermission() {
-    if (Platform.OS === 'android') {
-      let permission;
-
-      if (Platform.OS === 'android') {
-        permission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
-      } else if (Platform.OS === 'ios') {
-        permission = PERMISSIONS.IOS.PHOTO_LIBRARY; // Use this for broader storage scenarios on iOS
-      }
-
-      const result = await check(permission);
-      switch (result) {
-        case RESULTS.UNAVAILABLE:
-          console.log('This feature is not available on this device/context');
-          return false;
-        case RESULTS.DENIED:
-          const requestResult = await request(permission);
-          return requestResult === RESULTS.GRANTED;
-        case RESULTS.LIMITED:
-          console.log('The permission is limited: some actions are possible');
-          return true;
-        case RESULTS.GRANTED:
-          console.log('The permission is granted');
-          return true;
-        case RESULTS.BLOCKED:
-          console.log('The permission is blocked');
-          return false;
-      }
-    }
-  }
 
   useEffect(() => {
     // Listener per lo stato di autenticazione di Firebase
