@@ -43,7 +43,7 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
           <Text style={styles.text}>Inserisci la tua email:</Text>
           <TextInput style={styles.textInput} placeholder="example@email.com" autoCapitalize="none" onChangeText={setForgotPasswordEmail} value={forgotPasswordEmail} />
           <View style={styles.button} marginTop='15%'>
-            <Button title="Richiedi password" onPress={handleResetPassword} color='#00e480' />
+            <Button title="Richiedi password" onPress={handleResetPassword} color='rgb(3, 159, 86)' />
           </View>
         </View>
         <Table

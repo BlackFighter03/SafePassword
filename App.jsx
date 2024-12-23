@@ -2,6 +2,31 @@ import { useEffect, useState } from 'react';
 import StartPage from './Pages/StartPage';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
 import { removeFinalSpaces } from './Components/removeFinalSpaces';
+import { PermissionsAndroid, Platform } from 'react-native';
+
+async function requestStoragePermission() {
+  if (Platform.OS === 'android') {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        {
+          title: 'Permesso di accesso alla memoria',
+          message: 'L\'app ha bisogno di accedere alla tua memoria per salvare i file.',
+          buttonNeutral: 'Chiedimi dopo',
+          buttonNegative: 'Annulla',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Permesso concesso');
+      } else {
+        console.log('Permesso negato');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  }
+}
 
 
 /**
@@ -45,6 +70,7 @@ const App = () => {
         console.log('User logged out successfully!');
         setPassword('');
       } else {
+        requestStoragePermission();
         if (showSignUp) {
           setEmail(removeFinalSpaces(email));
           setPassword(removeFinalSpaces(password));

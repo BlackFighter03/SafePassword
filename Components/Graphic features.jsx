@@ -177,7 +177,7 @@ textFinishTable : {
       paddingVertical:'1.1%',
       paddingStart: '35.05%',
       paddingEnd: '35.05%',
-      backgroundColor: '#01df81',
+      backgroundColor: 'rgb(3, 159, 86)',
       borderColor: "white",
       borderWidth: 0.8
   },
@@ -186,7 +186,18 @@ textFinishTable : {
     paddingVertical:'1.1%',
     paddingLeft:"37.9%",
     paddingRight:"37.9%",
-    backgroundColor: '#01df81',
+    backgroundColor: 'rgb(3, 159, 86)',
+    borderColor: "white",
+    borderLeftWidth: 0.8,
+    borderRightWidth:0.8,
+    borderBottomWidth:0.8
+},
+
+  buttonLastSideMenu: {
+    paddingVertical:'1.1%',
+    paddingLeft:"37.9%",
+    paddingRight:"37.9%",
+    backgroundColor: 'rgb(194, 0, 0)',
     borderColor: "white",
     borderLeftWidth: 0.8,
     borderRightWidth:0.8,

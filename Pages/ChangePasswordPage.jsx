@@ -124,7 +124,7 @@ const ChangePasswordPage = ({ auth, email, password, setPassword, visible, onClo
             )}
           </View>
           <View style={styles.button} marginTop='15%'>
-            <Button title="Richiedi password" onPress={handleChangePassword} color='#00e480' />
+            <Button title="Richiedi password" onPress={handleChangePassword} color='rgb(3, 159, 86)' />
           </View>
         </View>
         <Table
