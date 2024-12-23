@@ -63,7 +63,6 @@ const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentic
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user && email) {
         // Se l'utente è autenticato, scarica le password da Firebase
-        await requestStoragePermission();
         await downloadFile();
       }
     });
