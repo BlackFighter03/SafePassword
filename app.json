@@ -31,7 +31,8 @@
         "image": "./assets/Logo.png",
         "resizeMode": "contain",
         "backgroundColor": "#202134"
-      }
+      },
+      "package": "com.alessio003.SafePassword"
     },
     "web": {
       "favicon": "./assets/Logo.png"
