@@ -1,4 +1,3 @@
-import { Header as HeaderRNE, Icon } from '@rneui/themed';
 import { View, Text, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
 import { sendPasswordResetEmail } from '@firebase/auth';
 import { styles } from '../Components/Graphic features';
@@ -30,12 +29,7 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
   return (
     <Modal visible={visible} animationType="slide">
       <View style={styles.container}>
-        <View style={styles.headerBackground}>
-          <TouchableOpacity onPress={handleSignInPage} style={styles.iconAreaHeaderRight}>
-            <Ionicons name="return-up-back-outline" style={styles.iconHeader} onPress={handleSignInPage} />
-          </TouchableOpacity>
-          <Text style={styles.textHeader}>{"Recupera password"}</Text>
-        </View>
+        <Header leftIcon={"return-up-back-outline"} headerTxt={"Recupera password"} isRight={false}/>
         <View style={styles.container} marginTop='20%'>
           <Text style={styles.text}>Inserisci la tua email:</Text>
           <TextInput style={styles.textInput} placeholder="example@email.com" autoCapitalize="none" onChangeText={setForgotPasswordEmail} value={forgotPasswordEmail} />
