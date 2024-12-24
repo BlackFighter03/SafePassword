@@ -54,12 +54,28 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
+  headerBackground: {
+    backgroundColor: '#00e480',
+    paddingVertical:'3.5%',
+  },
+
+  iconAreaHeaderLeft:{
+    marginLeft:'2%',
+    paddingLeft: '2.5%',
+    position: 'absolute',
+  },
+
+  iconHeaderLeft:{
+    fontSize: 27.5,
+    color: 'white',
+    paddingVertical:'3.5%',
+  },
+
   textHeader: {
-    marginLeft: '5%',
+    textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    color: '#ffff',
-    
+    color: 'white',
   },
 
   textHeaderTable: {

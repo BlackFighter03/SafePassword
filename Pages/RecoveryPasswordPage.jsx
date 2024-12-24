@@ -1,9 +1,11 @@
 import { Header as HeaderRNE, Icon } from '@rneui/themed';
-import { View, Text, TextInput, Button, Modal, TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
 import { sendPasswordResetEmail } from '@firebase/auth';
 import { styles } from '../Components/Graphic features';
 import { useState } from 'react';
 import Table from '../Components/Table';
+import Header from '../Components/Header';
+import { Ionicons } from '@expo/vector-icons';
 
 const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPasswordEmail, handleSignInPage }) => {
 
@@ -28,6 +30,13 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
   return (
     <Modal visible={visible} animationType="slide">
       <View style={styles.container}>
+        <View style={styles.headerBackground}>
+          <TouchableOpacity onPress={handleSignInPage} style={styles.iconAreaHeaderLeft}>
+          <Ionicons name="return-up-back-outline" style={styles.iconHeaderLeft} onPress={handleSignInPage}/>
+          </TouchableOpacity>
+          <Text style={styles.textHeader}>{"Recupera password"}</Text>
+        </View>
+        {/*
         <HeaderRNE
           backgroundColor='#00e480'
           leftComponent={
@@ -39,6 +48,7 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
           }
           centerComponent={{ text: 'Recupera password', style: styles.textHeader, onPress: handleSignInPage }}
         />
+        */}
         <View style={styles.container} marginTop='20%'>
           <Text style={styles.text}>Inserisci la tua email:</Text>
           <TextInput style={styles.textInput} placeholder="example@email.com" autoCapitalize="none" onChangeText={setForgotPasswordEmail} value={forgotPasswordEmail} />
@@ -50,7 +60,8 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
           visible={info}
           setVisible={() => {
             setInfo(false);
-            handleSignInPage();}}
+            handleSignInPage();
+          }}
           title={title}
           msg={msg}
         />
