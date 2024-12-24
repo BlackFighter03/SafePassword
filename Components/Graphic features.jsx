@@ -59,13 +59,20 @@ const styles = StyleSheet.create({
     paddingVertical:'3.5%',
   },
 
-  iconAreaHeaderLeft:{
+  iconAreaHeaderRight:{
     marginLeft:'2%',
     paddingLeft: '2.5%',
     position: 'absolute',
   },
 
-  iconHeaderLeft:{
+  iconAreaHeaderRight:{
+    marginRight:'2%',
+    paddingRight: '2.5%',
+    position: 'absolute',
+    alignContent: 'flex-end'
+  },
+
+  iconHeader:{
     fontSize: 27.5,
     color: 'white',
     paddingVertical:'3.5%',

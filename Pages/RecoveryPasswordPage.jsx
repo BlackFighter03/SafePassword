@@ -31,8 +31,8 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
     <Modal visible={visible} animationType="slide">
       <View style={styles.container}>
         <View style={styles.headerBackground}>
-          <TouchableOpacity onPress={handleSignInPage} style={styles.iconAreaHeaderLeft}>
-            <Ionicons name="return-up-back-outline" style={styles.iconHeaderLeft} onPress={handleSignInPage} />
+          <TouchableOpacity onPress={handleSignInPage} style={styles.iconAreaHeaderRight}>
+            <Ionicons name="return-up-back-outline" style={styles.iconHeader} onPress={handleSignInPage} />
           </TouchableOpacity>
           <Text style={styles.textHeader}>{"Recupera password"}</Text>
         </View>
