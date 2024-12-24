@@ -12,6 +12,7 @@ import sortedStrings from '../Components/PasswordSorting';
 import SideMenu from '../Components/SideMenu';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import ChangePasswordPage from './ChangePasswordPage';
+import Header from '../Components/Header';
 
 /**
  * Componente: AuthenticatedScreen
@@ -299,24 +300,13 @@ const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentic
 
   return (
     <View style={styles.container}>
-      <HeaderRNE
-        backgroundColor="#00e480"
-        leftComponent={
-          <View>
-            <TouchableOpacity onPress={() => setIsOpenSideMenu(true)}>
-              {/**handleAuthentication usata per il logout*/}
-              <MaterialCommunityIcons name="menu" size={24} color="white" />
-            </TouchableOpacity>
-          </View>
-        }
-        centerComponent={{ text: 'Safe Password', style: styles.textHeader }}
-        rightComponent={
-          <View>
-            <TouchableOpacity onPress={handleAddPassword}>
-              <Icon type="materialicons" name="add-circle" color="white" />
-            </TouchableOpacity>
-          </View>
-        }
+      <Header
+        leftIcon={menu}
+        leftFun={() => setIsOpenSideMenu(true)}
+        headerTxt={"Safe Password"}
+        isRight={true}
+        rightIcon={"add-circle"}
+        rightFun={handleAddPassword}
       />
       <SideMenu
         isOpen={isOpenSideMenu}

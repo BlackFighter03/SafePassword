@@ -6,6 +6,7 @@ import { styles } from '../Components/Graphic features';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useState } from 'react';
 import Table from '../Components/Table';
+import Header from '../Components/Header';
 
 const ChangePasswordPage = ({ auth, email, password, setPassword, visible, onClose }) => {
 
@@ -80,16 +81,11 @@ const ChangePasswordPage = ({ auth, email, password, setPassword, visible, onClo
                 scrollEnabled={true}
             >
       <View style={styles.container}>
-        <HeaderRNE
-          backgroundColor='#00e480'
-          leftComponent={
-            <View>
-              <TouchableOpacity onPress={onClose}>
-                <Icon type="ionicon" name="return-up-back-outline" color="white" />
-              </TouchableOpacity>
-            </View>
-          }
-          centerComponent={{ text: 'Cambia password', style: styles.textHeader, onPress: handleChangePassword }}
+        <Header
+          leftIcon={"return-up-back-outline"}
+          leftFun={onClose}
+          headerTxt={"Cambia password"}
+          rightIcon={""}
         />
         <View style={styles.container} marginTop='20%'>
 

@@ -1,10 +1,9 @@
-import { View, Text, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, Modal} from 'react-native';
 import { sendPasswordResetEmail } from '@firebase/auth';
 import { styles } from '../Components/Graphic features';
 import { useState } from 'react';
 import Table from '../Components/Table';
 import Header from '../Components/Header';
-import { Ionicons } from '@expo/vector-icons';
 
 const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPasswordEmail, handleSignInPage }) => {
 
@@ -29,7 +28,12 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
   return (
     <Modal visible={visible} animationType="slide">
       <View style={styles.container}>
-        <Header leftIcon={"return-up-back-outline"} headerTxt={"Recupera password"} isRight={false}/>
+        <Header
+          leftIcon={"return-up-back-outline"}
+          leftFun={handleSignInPage}
+          headerTxt={"Recupera password"}
+          rightIcon={""}
+          />
         <View style={styles.container} marginTop='20%'>
           <Text style={styles.text}>Inserisci la tua email:</Text>
           <TextInput style={styles.textInput} placeholder="example@email.com" autoCapitalize="none" onChangeText={setForgotPasswordEmail} value={forgotPasswordEmail} />

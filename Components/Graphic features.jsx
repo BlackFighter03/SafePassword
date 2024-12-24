@@ -57,28 +57,27 @@ const styles = StyleSheet.create({
   headerBackground: {
     backgroundColor: '#00e480',
     paddingVertical:'3.5%',
+    paddingHorizontal: '1%',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 
-  iconAreaHeaderRight:{
+  iconAreaHeaderLeft:{
     marginLeft:'2%',
-    paddingLeft: '2.5%',
-    position: 'absolute',
   },
 
   iconAreaHeaderRight:{
     marginRight:'2%',
-    paddingRight: '2.5%',
-    position: 'absolute',
-    alignContent: 'flex-end'
   },
 
   iconHeader:{
     fontSize: 27.5,
     color: 'white',
-    paddingVertical:'3.5%',
   },
 
   textHeader: {
+    flex: 1,
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
