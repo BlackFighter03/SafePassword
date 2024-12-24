@@ -32,23 +32,10 @@ const RecoveryPasswordPage = ({ auth, visible, forgotPasswordEmail, setForgotPas
       <View style={styles.container}>
         <View style={styles.headerBackground}>
           <TouchableOpacity onPress={handleSignInPage} style={styles.iconAreaHeaderLeft}>
-          <Ionicons name="return-up-back-outline" style={styles.iconHeaderLeft} onPress={handleSignInPage}/>
+            <Ionicons name="return-up-back-outline" style={styles.iconHeaderLeft} onPress={handleSignInPage} />
           </TouchableOpacity>
           <Text style={styles.textHeader}>{"Recupera password"}</Text>
         </View>
-        {/*
-        <HeaderRNE
-          backgroundColor='#00e480'
-          leftComponent={
-            <View>
-              <TouchableOpacity onPress={handleSignInPage}>
-                <Icon type="ionicon" name="return-up-back-outline" color="white" />
-              </TouchableOpacity>
-            </View>
-          }
-          centerComponent={{ text: 'Recupera password', style: styles.textHeader, onPress: handleSignInPage }}
-        />
-        */}
         <View style={styles.container} marginTop='20%'>
           <Text style={styles.text}>Inserisci la tua email:</Text>
           <TextInput style={styles.textInput} placeholder="example@email.com" autoCapitalize="none" onChangeText={setForgotPasswordEmail} value={forgotPasswordEmail} />
