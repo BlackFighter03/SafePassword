@@ -242,7 +242,7 @@ textFinishTable : {
     position: 'absolute',
     color: 'grey',
     fontSize: 27.5,
-    marginTop: '5%',
+    marginTop: '5.5%',
     backgroundColor: '#ffff',
     marginLeft: '87%',
   },
@@ -250,7 +250,7 @@ textFinishTable : {
   fontAwesomeEyeItem: {
     color: '#ffff',
     fontSize: 27.5,
-    marginTop: '5%',
+    marginTop: '5.5%',
     backgroundColor: '#202134',
     marginLeft: '5%',
     marginBottom: '1%',
