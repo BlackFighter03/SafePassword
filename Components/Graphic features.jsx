@@ -250,7 +250,6 @@ textFinishTable : {
   fontAwesomeEyeItem: {
     color: '#ffff',
     fontSize: 27.5,
-    marginTop: '4%',
     backgroundColor: '#202134',
     marginLeft: '5%',
     marginBottom: '1%',
