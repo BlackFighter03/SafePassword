@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import SideMenu from './SideMenu';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,33 +54,39 @@ const styles = StyleSheet.create({
   },
 
   headerBackground: {
+    paddingVertical: '2%',
     backgroundColor: '#00e480',
-    paddingVertical:'3.5%',
-    paddingHorizontal: '1%',
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: '2.5%',
   },
 
   iconAreaHeaderLeft:{
-    marginLeft:'2%',
+    width: 40,
+    paddingLeft: '2%'
   },
 
   iconAreaHeaderRight:{
-    marginRight:'2%',
+    width: 40,
+    paddingRight: '2%',
   },
 
   iconHeader:{
     fontSize: 27.5,
     color: 'white',
+
   },
 
   textHeader: {
-    flex: 1,
-    textAlign: 'center',
-    fontWeight: 'bold',
     fontSize: 20,
     color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    flex: 1, 
+  },
+
+  placeholder: {
+    width: 40,
   },
 
   textHeaderTable: {

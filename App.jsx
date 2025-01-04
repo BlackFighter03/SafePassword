@@ -3,7 +3,6 @@ import StartPage from './Pages/StartPage';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
 import { removeFinalSpaces } from './Components/removeFinalSpaces';
 
-
 /**
  * Struttura per l'inizializzazione dell'app
  * (Da non modificare)
@@ -45,7 +44,6 @@ const App = () => {
         console.log('User logged out successfully!');
         setPassword('');
       } else {
-        requestStoragePermission();
         if (showSignUp) {
           setEmail(removeFinalSpaces(email));
           setPassword(removeFinalSpaces(password));
@@ -58,6 +56,7 @@ const App = () => {
               await createUser(auth, email, password);
               console.log('User created successfully!');
             } catch (error) {
+              console.log(error);
               setWarningSignUp(true);
             }
           }
@@ -69,6 +68,7 @@ const App = () => {
         }
       }
     } catch (error) {
+      console.log(error);
       setWarning(true);
     }
   };

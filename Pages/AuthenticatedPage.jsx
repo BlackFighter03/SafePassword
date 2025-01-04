@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Alert, FlatList} from 'react-native';
+import { View, Modal, FlatList} from 'react-native';
 import AddPasswordModal from './AddPasswordModal';
 import Item from '../Components/Item';
 import { styles } from '../Components/Graphic features';
 import * as FileSystem from 'expo-file-system';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
-import { Header as HeaderRNE, Icon } from '@rneui/themed';
 import { auth, storage } from '../Components/Firebase';
 import { criptaTesto, decriptaTesto } from '../Components/Criptography';
 import sortedStrings from '../Components/PasswordSorting';
 import SideMenu from '../Components/SideMenu';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import ChangePasswordPage from './ChangePasswordPage';
 import Header from '../Components/Header';
+import Table from '../Components/Table';
 
 /**
  * Componente: AuthenticatedScreen
@@ -53,6 +52,7 @@ const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentic
   const [websiteTemp, setWebsiteTemp] = useState('');
   const [usernameTemp, setUsernameTemp] = useState('');
   const [passwordTemp, setPasswordTemp] = useState('');
+  const [alert, setAlert] = useState(false);
 
   // Flag per indicare se è in corso il caricamento del file
   const [isLoading, setIsLoading] = useState(true); // isLoading è ora gestito come stato
@@ -219,8 +219,7 @@ const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentic
         // Aggiorna lo stato 'passwords' aggiungendo la nuova password e ordinando l'array
         setDecryptedPasswords((prevPasswords) => [...prevPasswords, newPasswordData].sort(sortedStrings));
       } else {
-        // Mostra un messaggio di avviso se la password è duplicata
-        Alert.alert('Attenzione', 'Un account con lo stesso sito e nome utente è stato già salvato');
+        setAlert(true);
       }
 
       // Reimposta i campi di input
@@ -299,9 +298,10 @@ const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentic
   };
 
   return (
+    <Modal visible={user != null} animationType="fade">
     <View style={styles.container}>
       <Header
-        leftIcon={menu}
+        leftIcon={"menu"}
         leftFun={() => setIsOpenSideMenu(true)}
         headerTxt={"Safe Password"}
         isRight={true}
@@ -359,7 +359,16 @@ const AuthenticatedPage = ({ user, email, password, setPassword, handleAuthentic
         onClose={() => setChangePasswordVisible(false)}
         setPassword={setPassword}
       />
+      <Table
+          visible={alert}
+          setVisible={() => {
+            setAlert(false);
+          }}
+          title={"Attenzione"}
+          msg={'Un account con lo stesso sito e nome utente è stato già salvato'}
+        />
     </View>
+    </Modal>
   );
 };
 

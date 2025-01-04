@@ -20,7 +20,7 @@ return(
       <TouchableOpacity onPress={rightFun} style={styles.iconAreaHeaderRight}>
       <Ionicons name={rightIcon} style={styles.iconHeader} onPress={rightFun} />
     </TouchableOpacity>
-    : null}
+    :  <View style={styles.placeholder} />}
   </View>
 );
 };

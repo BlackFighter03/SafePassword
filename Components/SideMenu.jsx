@@ -77,7 +77,7 @@ const SideMenu = ({ isOpen, onClose, onLogout, setChangePwd }) => {
       <Animated.View 
         style={{
           position: 'absolute',
-          top: '4.7%',
+          top: 0,
           bottom: 0,
           left: 0,
           right: 0,
