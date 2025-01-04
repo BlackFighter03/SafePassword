@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Safe Password",
-    "slug": "Safe Password",
+    "slug": "SafePassword",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/Logo.png",
@@ -42,7 +42,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "12759b24-0bbc-437a-8a1a-60bf3ee1c008"
+        "projectId": "892ed594-562d-4317-a269-88f1bc74a1a5"
       }
     }
   }
