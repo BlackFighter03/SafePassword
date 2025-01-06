@@ -1,7 +1,9 @@
+import { Alert } from 'react-native';
 import { useEffect, useState } from 'react';
 import StartPage from './Pages/StartPage';
 import { auth, createUser, signInUser, onAuthStateChange, signOutUser } from './Components/Firebase';
 import { removeFinalSpaces } from './Components/removeFinalSpaces';
+
 
 /**
  * Struttura per l'inizializzazione dell'app
@@ -42,24 +44,14 @@ const App = () => {
       if (user) {
         await signOutUser(auth);
         console.log('User logged out successfully!');
-        setPassword('');
       } else {
         if (showSignUp) {
           setEmail(removeFinalSpaces(email));
           setPassword(removeFinalSpaces(password));
           setConfirmPassword(removeFinalSpaces(confirmPassword));
-          if (password !== confirmPassword) {
-            setWarningSignUp(true);
-            return;
-          } else {
-            try {
-              await createUser(auth, email, password);
-              console.log('User created successfully!');
-            } catch (error) {
-              console.log(error);
-              setWarningSignUp(true);
-            }
-          }
+          await createUser(auth, email, password);
+          console.log('User created successfully!');
+          setShowSignUp(false);
         } else {
           setEmail(removeFinalSpaces(email));
           setPassword(removeFinalSpaces(password));
@@ -68,8 +60,10 @@ const App = () => {
         }
       }
     } catch (error) {
-      console.log(error);
-      setWarning(true);
+      if(showSignUp)
+        setWarningSignUp(true);
+      else
+        setWarning(true);
     }
   };
 

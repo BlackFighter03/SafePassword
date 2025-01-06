@@ -20,7 +20,7 @@ const SignUpPage = ({ handleAuthentication, visible, setVisible, email, setEmail
         }else{
             setError(false);
             setPadTop("20%");
-            handleAuthentication(email, password, confirmPassword);
+            handleAuthentication();
         }
 
     }
@@ -28,7 +28,7 @@ const SignUpPage = ({ handleAuthentication, visible, setVisible, email, setEmail
     return (
         <Modal visible={visible} animationType='fade'>
             <KeyboardAwareScrollView
-                style={styles.container} // Imposta lo stile desiderato per la ScrollView. Assicurati che "flex: 1" sia presente.
+                style={styles.container}
                 resetScrollToCoords={{ x: 0, y: 0 }}
                 scrollEnabled={true}
             >
