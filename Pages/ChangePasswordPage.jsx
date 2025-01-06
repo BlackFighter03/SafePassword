@@ -1,4 +1,3 @@
-import { Header as HeaderRNE, Icon } from '@rneui/themed';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { View, Text, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
 import { updatePassword, EmailAuthProvider, reauthenticateWithCredential } from '@firebase/auth';
